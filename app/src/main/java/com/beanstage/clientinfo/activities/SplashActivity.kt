@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
      fun launcheClientsActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, ClientActivity::class.java)
         runBlocking {
             delay(5000)
         }
