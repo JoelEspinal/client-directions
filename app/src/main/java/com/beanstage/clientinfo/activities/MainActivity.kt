@@ -1,7 +1,8 @@
-package com.beanstage.clientinfo
+package com.beanstage.clientinfo.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.beanstage.clientinfo.R
 import com.beanstage.clientinfo.ui.client.ClientFragment
 
 class MainActivity : AppCompatActivity() {
