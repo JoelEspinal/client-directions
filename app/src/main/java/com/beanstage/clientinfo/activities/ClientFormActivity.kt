@@ -41,12 +41,10 @@ class ClientFormActivity : AppCompatActivity() {
         val addEditClientButton = findViewById<Button>(R.id.add_edit_client_button)
         addEditClientButton.setOnClickListener {
             val newClient = getEditingClient()
-            if (newClient.clientName !=  currentClientName) {
                 clientViewModel.insert(newClient)
                 currentClientName = newClient.clientName
-            } else {
-                Toast.makeText(this, "No puede guardar repetidos", Toast.LENGTH_LONG).show()
-            }
+
+                Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
         }
 
         val addEditAddressButton = findViewById<Button>(R.id.add_edit_address_button)
@@ -54,6 +52,7 @@ class ClientFormActivity : AppCompatActivity() {
             val newAddress = getEditingAddress()
 
             addressViewModel.insert(newAddress)
+
         }
     }
 
@@ -66,9 +65,6 @@ class ClientFormActivity : AppCompatActivity() {
         val socialReason = clientSocialReason.text.toString()
         val contactAgent =  clientContactAgent.text.toString()
 
-        clientName.text.clear()
-        clientSocialReason.text.clear()
-        clientContactAgent.text.clear()
 
         return Client(buisnessName, socialReason, contactAgent)
     }
