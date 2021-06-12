@@ -20,7 +20,9 @@ class ClientFormActivity : AppCompatActivity() {
     private lateinit var clientViewModel: ClientViewModel
     private lateinit var addressViewModel: AddressViewModel
 
-    var currentClientName = "joel"
+    private lateinit var  addEditAddressButton: Button
+
+    var currentClientName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,8 @@ class ClientFormActivity : AppCompatActivity() {
 
         clientViewModel = ClientViewModel((application as ClientApplication).clientRepository)
         addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
+
+        addEditAddressButton = findViewById<Button>(R.id.add_edit_address_button)
 
         val recyclerView = findViewById<RecyclerView>(R.id.address_recyclerview)
         val adapter = AddressListAdapter()
@@ -39,15 +43,16 @@ class ClientFormActivity : AppCompatActivity() {
         }
 
         val addEditClientButton = findViewById<Button>(R.id.add_edit_client_button)
+        enabledAddressSaveButton()
         addEditClientButton.setOnClickListener {
             val newClient = getEditingClient()
                 clientViewModel.insert(newClient)
                 currentClientName = newClient.clientName
-
+                enabledAddressSaveButton()
                 Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
         }
 
-        val addEditAddressButton = findViewById<Button>(R.id.add_edit_address_button)
+
         addEditAddressButton.setOnClickListener {
             val newAddress = getEditingAddress()
 
@@ -87,5 +92,9 @@ class ClientFormActivity : AppCompatActivity() {
 
         return Address(clientName = "joel", sectorName = sectionValue, streetName = streetValue,
             number = numberValue, reference = referenceValue)
+    }
+
+    fun enabledAddressSaveButton() {
+        addEditAddressButton.isEnabled = currentClientName.isNotEmpty()
     }
 }
