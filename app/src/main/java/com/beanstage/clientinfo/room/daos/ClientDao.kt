@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ClientDao {
     @Query("SELECT * FROM client_table ORDER BY client_name ASC")
-    fun getClients(): Flow<List<Client>>
+    fun getFromClient(): Flow<List<Client>>
 
     @Query("SELECT * FROM client_table")
     fun getAll(): Flow<List<Client>>

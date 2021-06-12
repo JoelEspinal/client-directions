@@ -11,9 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 class ClientRepository(private val clientDao: ClientDao) {
 
-    val allClients : Flow<List<Client>> = clientDao.getClients()
-
-    val getAll : Flow<List<Client>> = clientDao.getAll()
+    val allClients : Flow<List<Client>> = clientDao.getAll() // clientDao.getClients()
 
     @WorkerThread
     suspend fun insert(client: Client) {

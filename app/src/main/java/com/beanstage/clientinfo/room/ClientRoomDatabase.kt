@@ -5,17 +5,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.beanstage.clientinfo.room.daos.AddressDao
 import com.beanstage.clientinfo.room.daos.ClientDao
+import com.beanstage.clientinfo.room.entities.Address
 import com.beanstage.clientinfo.room.entities.Client
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [Client::class], version = 1)
+@Database(entities = [Client::class, Address::class], version = 1)
 abstract class ClientRoomDatabase : RoomDatabase() {
 
     abstract fun clientDao(): ClientDao
+    abstract fun addressDao(): AddressDao
 
     companion object {
         @Volatile

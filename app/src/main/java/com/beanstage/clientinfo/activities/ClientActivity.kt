@@ -20,19 +20,12 @@ class ClientActivity : AppCompatActivity() {
     private lateinit var viewModel: ClientViewModel
 
     private val newWordActivityRequestCode = 1
-//    private val clientViewModel: ClientViewModel by viewModels {
-//        ClientViewModelFactory((application as ClientApplication).repository)
-//    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.client_activity)
-//        viewModel = ViewModelProvider(this).get(ClientViewModel::class.java)
 
-        viewModel = ClientViewModel((application as ClientApplication).repository)
-
-
+        viewModel = ClientViewModel((application as ClientApplication).clientRepository)
 
         val recyclerView = findViewById<RecyclerView>(R.id.client_recyclerview)
         val adapter = ClientListAdapter()
@@ -40,7 +33,6 @@ class ClientActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         viewModel.allClients.observe(this) { clients ->
-            // Update the cached copy of the words in the adapter.
             clients.let {  adapter.submitList(clients) }
         }
 
