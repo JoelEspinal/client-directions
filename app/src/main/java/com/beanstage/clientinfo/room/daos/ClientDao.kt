@@ -16,7 +16,7 @@ interface ClientDao {
     fun getAll(): Flow<List<Client>>
 
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(client: Client)
 
     @Query("DELETE FROM client_table")
