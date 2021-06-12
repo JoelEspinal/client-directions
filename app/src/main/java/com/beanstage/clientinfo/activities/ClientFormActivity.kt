@@ -8,31 +8,34 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
-import com.beanstage.clientinfo.adapters.ClientListAdapter
+import com.beanstage.clientinfo.adapters.AddressListAdapter
 import com.beanstage.clientinfo.app.ClientApplication
+import com.beanstage.clientinfo.room.entities.Address
 import com.beanstage.clientinfo.room.entities.Client
+import com.beanstage.clientinfo.viewmodels.AddressViewModel
 import com.beanstage.clientinfo.viewmodels.ClientViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ClientFormActivity : AppCompatActivity() {
 
     private lateinit var clientViewModel: ClientViewModel
-    var currentClientName = ""
+    private lateinit var addressViewModel: AddressViewModel
+
+    var currentClientName = "joel"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client_form)
 
-        clientViewModel = ClientViewModel((application as ClientApplication).repository)
+        clientViewModel = ClientViewModel((application as ClientApplication).clientRepository)
+        addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
         val recyclerView = findViewById<RecyclerView>(R.id.address_recyclerview)
-        val adapter = ClientListAdapter()
+        val adapter = AddressListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        clientViewModel.allClients.observe(this) { clients ->
-            // Update the cached copy of the words in the adapter.
-            clients.let {  adapter.submitList(clients) }
+        addressViewModel.getAllByClientName("joel").observe(this) { addresses ->
+            addresses.let {  adapter.submitList(addresses) }
         }
 
         val addEditClientButton = findViewById<Button>(R.id.add_edit_client_button)
@@ -44,6 +47,13 @@ class ClientFormActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "No puede guardar repetidos", Toast.LENGTH_LONG).show()
             }
+        }
+
+        val addEditAddressButton = findViewById<Button>(R.id.add_edit_address_button)
+        addEditAddressButton.setOnClickListener {
+            val newAddress = getEditingAddress()
+
+            addressViewModel.insert(newAddress)
         }
     }
 
@@ -61,5 +71,25 @@ class ClientFormActivity : AppCompatActivity() {
         clientContactAgent.text.clear()
 
         return Client(buisnessName, socialReason, contactAgent)
+    }
+
+    fun getEditingAddress() : Address {
+        val section = findViewById<EditText>(R.id.sector_editText)
+        val street = findViewById<EditText>(R.id.street_editText)
+        val number = findViewById<EditText>(R.id.number_editText)
+        val reference = findViewById<EditText>(R.id.address_reference_editText)
+
+        val sectionValue = section.text.toString()
+        val streetValue = street.text.toString()
+        val numberValue = number.text.toString()
+        val referenceValue = reference.text.toString()
+
+        section.text.clear()
+        street.text.clear()
+        number.text.clear()
+        reference.text.clear()
+
+        return Address(0, clientName = "joel", sectorName = sectionValue, streetName = streetValue,
+            number = numberValue, reference = referenceValue)
     }
 }
