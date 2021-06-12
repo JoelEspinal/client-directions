@@ -8,7 +8,6 @@ import kotlinx.coroutines.*
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_ClientInfo)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         launcheClientsActivity()
