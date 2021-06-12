@@ -18,13 +18,3 @@ class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
         repository.insert(client)
     }
 }
-
-class ClientViewModelFactory(private val repository: ClientRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ClientViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return ClientViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
