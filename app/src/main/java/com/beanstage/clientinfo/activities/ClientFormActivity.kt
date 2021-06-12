@@ -85,7 +85,7 @@ class ClientFormActivity : AppCompatActivity() {
         number.text.clear()
         reference.text.clear()
 
-        return Address(0, clientName = "joel", sectorName = sectionValue, streetName = streetValue,
+        return Address(clientName = "joel", sectorName = sectionValue, streetName = streetValue,
             number = numberValue, reference = referenceValue)
     }
 }
