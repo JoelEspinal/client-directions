@@ -1,5 +1,6 @@
 package com.beanstage.clientinfo.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.MediatorLiveData
@@ -11,6 +12,7 @@ import com.beanstage.clientinfo.adapters.ClientListAdapter
 import com.beanstage.clientinfo.app.ClientApplication
 import com.beanstage.clientinfo.room.entities.Client
 import com.beanstage.clientinfo.viewmodels.ClientViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ClientActivity : AppCompatActivity() {
 
@@ -36,19 +38,16 @@ class ClientActivity : AppCompatActivity() {
         val adapter = ClientListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-//
-//        viewModel.allClients().value?.size
-//
-//        var mediatorLiveData: MediatorLiveData<List<Client>> = MediatorLiveData()
-//        mediatorLiveData.addSource(viewModel.allClients(), Observer {
-//            if (it.isNotEmpty()) {
-//                mediatorLiveData.value = it
-//            }
-//        })
 
         viewModel.allClients.observe(this) { clients ->
             // Update the cached copy of the words in the adapter.
             clients.let {  adapter.submitList(clients) }
+        }
+
+        val fab = findViewById<FloatingActionButton>(R.id.new_client_fab)
+        fab.setOnClickListener {
+            val intent = Intent(this, ClientFormActivity::class.java)
+            startActivity(intent)
         }
     }
 }
