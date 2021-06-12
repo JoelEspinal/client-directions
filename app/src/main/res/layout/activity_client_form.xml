@@ -49,7 +49,7 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="Nombre"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -60,7 +60,7 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="Sector"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -71,7 +71,7 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="Calle"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 app:layout_constraintStart_toStartOf="@+id/sector_editText"
                 app:layout_constraintTop_toBottomOf="@+id/sector_editText" />
 
@@ -104,7 +104,7 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="Razon Social"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 app:layout_constraintStart_toStartOf="@+id/client_name_editText"
                 app:layout_constraintTop_toBottomOf="@+id/client_name_editText" />
 
@@ -115,7 +115,7 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="Agente de contacto"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 app:layout_constraintStart_toStartOf="@+id/social_reason_editText"
                 app:layout_constraintTop_toBottomOf="@+id/social_reason_editText" />
 

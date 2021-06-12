@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
@@ -16,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class ClientFormActivity : AppCompatActivity() {
 
     private lateinit var clientViewModel: ClientViewModel
+    var currentClientName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,12 @@ class ClientFormActivity : AppCompatActivity() {
         val addEditClientButton = findViewById<Button>(R.id.add_edit_client_button)
         addEditClientButton.setOnClickListener {
             val newClient = getEditingClient()
-            clientViewModel.insert(newClient)
+            if (newClient.clientName !=  currentClientName) {
+                clientViewModel.insert(newClient)
+                currentClientName = newClient.clientName
+            } else {
+                Toast.makeText(this, "No puede guardar repetidos", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
