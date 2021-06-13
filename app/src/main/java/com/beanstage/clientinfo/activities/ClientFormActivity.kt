@@ -43,7 +43,7 @@ class ClientFormActivity : AppCompatActivity() {
         clientViewModel = ClientViewModel((application as ClientApplication).clientRepository)
         addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
-        addEditAddressButton = findViewById<Button>(R.id.add_edit_address_button)
+        addEditAddressButton = findViewById<Button>(R.id.edit_button)
         addEditClientButton = findViewById<Button>(R.id.add_edit_client_button)
 
         recyclerView = findViewById<RecyclerView>(R.id.address_recyclerview)
