@@ -16,8 +16,7 @@ class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
 //    }
 
      fun getCurrentClient(clientName: String): Flow<Client> {
-        val a = repository.getCurrentClient(clientName)
-         return a
+       return repository.getCurrentClient(clientName)
     }
 
     fun insert(client: Client) = viewModelScope.launch {

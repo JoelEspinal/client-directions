@@ -19,8 +19,6 @@ class ClientActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ClientViewModel
 
-    private val newWordActivityRequestCode = 1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.client_activity)
