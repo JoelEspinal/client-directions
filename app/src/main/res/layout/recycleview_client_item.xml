@@ -11,7 +11,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="#DFDCDC"
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -22,7 +21,6 @@
         android:id="@+id/number_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#EEF3E1"
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView3"
@@ -33,7 +31,6 @@
         android:id="@+id/street_textview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#FCFDFCFC"
         android:textAlignment="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -43,7 +40,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#DFDCDC"
         android:text="Empresa:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sector_textview" />
@@ -52,7 +48,6 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FCFDFCFC"
         android:text="Razon Social:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sector_textview" />
@@ -61,7 +56,6 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#EEF3E1"
         android:text="Representante:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/street_textview" />
