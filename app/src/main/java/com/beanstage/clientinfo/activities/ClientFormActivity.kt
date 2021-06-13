@@ -88,12 +88,17 @@ class ClientFormActivity : AppCompatActivity() {
                 Toast.makeText(this, ":( debe completar todos los campos", Toast.LENGTH_LONG).show()
             }
         }
-
-
+        
         addEditAddressButton.setOnClickListener {
             val newAddress = getEditingAddress()
-            addressViewModel.insert(newAddress)
-            adapter.notifyDataSetChanged()
+            if (newAddress.sectorName.isNotEmpty() && newAddress.streetName.isNotEmpty()
+                && newAddress.number.isNotEmpty() && newAddress.reference.isNotEmpty()) {
+                addressViewModel.insert(newAddress)
+                adapter.notifyDataSetChanged()
+                Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, ":( debe completar todos los campos", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
