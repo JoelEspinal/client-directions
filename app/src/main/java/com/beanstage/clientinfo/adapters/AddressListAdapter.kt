@@ -12,8 +12,8 @@ import com.beanstage.clientinfo.room.entities.Address
 
 class AddressListAdapter : ListAdapter<Address, AddressListAdapter.AddressViewHolder>(ADDRESS_COMPARATOR)  {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressListAdapter.AddressViewHolder {
-        return AddressListAdapter.AddressViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressViewHolder {
+        return AddressViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: AddressListAdapter.AddressViewHolder, position: Int) {
