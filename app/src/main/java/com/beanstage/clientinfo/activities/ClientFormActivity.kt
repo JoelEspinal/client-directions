@@ -78,10 +78,15 @@ class ClientFormActivity : AppCompatActivity() {
 
         addEditClientButton.setOnClickListener {
             val newClient = getEditingClient()
+            if (newClient.clientName.isNotEmpty() && newClient.contactAgent.isNotEmpty()
+                && newClient.socialReason.isNotEmpty()) {
                 clientViewModel.insert(newClient)
                 currentClientName = newClient.clientName
                 enabledAddressSaveButton(newClient.clientName)
                 Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, ":( debe completar todos los campos", Toast.LENGTH_LONG).show()
+            }
         }
 
 
