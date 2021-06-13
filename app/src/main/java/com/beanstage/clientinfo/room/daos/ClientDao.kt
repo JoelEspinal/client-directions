@@ -12,6 +12,9 @@ interface ClientDao {
     @Query("SELECT * FROM client_table ORDER BY client_name ASC")
     fun getFromClient(): Flow<List<Client>>
 
+    @Query("SELECT * FROM client_table WHERE client_name = :clientName")
+    fun getCurrentClient(clientName: String): Flow<Client>
+
     @Query("SELECT * FROM client_table")
     fun getAll(): Flow<List<Client>>
 
