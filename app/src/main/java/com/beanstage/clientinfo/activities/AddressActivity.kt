@@ -2,10 +2,13 @@ package com.beanstage.clientinfo.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.beanstage.clientinfo.R
 import com.beanstage.clientinfo.app.ClientApplication
+import com.beanstage.clientinfo.room.entities.Address
 import com.beanstage.clientinfo.viewmodels.AddressViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,6 +22,10 @@ class AddressActivity : AppCompatActivity() {
     private lateinit var streetEditText: EditText
     private lateinit var numberEditText: EditText
     private lateinit var referenceEditText: EditText
+    private lateinit var editButton: Button
+
+    private lateinit var address: Address
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +36,13 @@ class AddressActivity : AppCompatActivity() {
         streetEditText = findViewById<EditText>(R.id.street_editText)
         numberEditText = findViewById<EditText>(R.id.number_editText)
         referenceEditText = findViewById<EditText>(R.id.address_reference_editText)
-
+        editButton = findViewById(R.id.edit_button)
 
         val addressId =  intent.getLongExtra(ADDRESS_ID, 0)
+
         lifecycleScope.launch {
             addressViewModel.getAddressById(addressId).collect {
+                address = it
                 sectionEditText.setText(it.sectorName)
                 streetEditText.setText(it.streetName)
                 numberEditText.setText(it.number)
@@ -41,5 +50,13 @@ class AddressActivity : AppCompatActivity() {
             }
         }
 
+        editButton.setOnClickListener {
+            address.sectorName =  sectionEditText.text.toString()
+            address.streetName =  streetEditText.text.toString()
+            address.number =  numberEditText.text.toString()
+            address.reference =  referenceEditText.text.toString()
+            addressViewModel.edit(address)
+            Toast.makeText(Address@this, "Editado Correctamente !!", Toast.LENGTH_LONG).show()
+        }
     }
 }
