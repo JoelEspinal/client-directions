@@ -12,8 +12,8 @@ class AddressViewModel(private val repository: AddressRepository) : ViewModel(){
 
 //        val allClients: LiveData<List<Client>> =
 
-     fun getAllByClientName(clientName: String): LiveData<List<Address>> {
-       return  repository.getAllByClientName(clientName).asLiveData()
+     fun getAllByClientName(clientId: Long): LiveData<List<Address>> {
+       return  repository.getAllByClientName(clientId).asLiveData()
     }
 
     fun getAddressById(addressId: Long): Flow<Address> {
