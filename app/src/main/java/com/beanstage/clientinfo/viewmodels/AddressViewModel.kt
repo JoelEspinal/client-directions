@@ -23,4 +23,8 @@ class AddressViewModel(private val repository: AddressRepository) : ViewModel(){
     fun insert(address: Address) = viewModelScope.launch {
         repository.insert(address)
     }
+
+    fun edit(address: Address) = viewModelScope.launch {
+        repository.edit(address)
+    }
 }
