@@ -31,6 +31,10 @@ class ClientFormActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AddressListAdapter
 
+    private lateinit var clientName: EditText
+    private lateinit var clientSocialReason: EditText
+    private lateinit var clientContactAgent: EditText
+
     var currentClientName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,13 +48,16 @@ class ClientFormActivity : AppCompatActivity() {
 
         recyclerView = findViewById<RecyclerView>(R.id.address_recyclerview)
 
+        clientName = findViewById<EditText>(R.id.client_name_editText)
+        clientSocialReason = findViewById<EditText>(R.id.social_reason_editText)
+        clientContactAgent = findViewById<EditText>(R.id.contact_agent_editText)
+
+
+
         val incomingClient =  intent.getStringExtra(CLIENT_NAME)
         if (incomingClient?.isNotEmpty() == true) {
             currentClientName = incomingClient;
 
-            val clientName = findViewById<EditText>(R.id.client_name_editText)
-            val clientSocialReason = findViewById<EditText>(R.id.social_reason_editText)
-            val clientContactAgent = findViewById<EditText>(R.id.contact_agent_editText)
 
             lifecycleScope.launch {
                 clientViewModel.getCurrentClient(currentClientName).collect {
@@ -92,14 +99,9 @@ class ClientFormActivity : AppCompatActivity() {
     }
 
     fun getEditingClient() : Client {
-        val clientName = findViewById<EditText>(R.id.client_name_editText)
-        val clientSocialReason = findViewById<EditText>(R.id.social_reason_editText)
-        val clientContactAgent = findViewById<EditText>(R.id.contact_agent_editText)
-
         val buisnessName = clientName.text.toString()
         val socialReason = clientSocialReason.text.toString()
         val contactAgent =  clientContactAgent.text.toString()
-
 
         return Client(buisnessName, socialReason, contactAgent)
     }
