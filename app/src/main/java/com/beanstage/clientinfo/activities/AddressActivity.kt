@@ -32,10 +32,10 @@ class AddressActivity : AppCompatActivity() {
         setContentView(R.layout.activity_address)
         addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
-        sectionEditText = findViewById<EditText>(R.id.sector_editText)
-        streetEditText = findViewById<EditText>(R.id.street_editText)
-        numberEditText = findViewById<EditText>(R.id.number_editText)
-        referenceEditText = findViewById<EditText>(R.id.address_reference_editText)
+        sectionEditText = findViewById(R.id.sector_editText)
+        streetEditText = findViewById(R.id.street_editText)
+        numberEditText = findViewById(R.id.number_editText)
+        referenceEditText = findViewById(R.id.address_reference_editText)
         editButton = findViewById(R.id.edit_button)
 
         val addressId =  intent.getLongExtra(ADDRESS_ID, 0)
@@ -58,7 +58,7 @@ class AddressActivity : AppCompatActivity() {
             if (address.sectorName.isNotEmpty() && address.streetName.isNotEmpty()
                 && address.number.isNotEmpty() && address.reference.isNotEmpty()) {
                 addressViewModel.edit(address)
-                Toast.makeText(Address@this, "Editado Correctamente !!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Editado Correctamente !!", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, ":( Debe completar todos los campos", Toast.LENGTH_LONG).show()
             }
