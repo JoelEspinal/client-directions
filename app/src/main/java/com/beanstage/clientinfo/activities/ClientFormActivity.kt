@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
@@ -18,7 +19,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import androidx.lifecycle.lifecycleScope
 
-const val CLIENT_NAME = "CLIENT_NAME"
+const val CLIENT_ID = "CLIENT_ID"
 
 class ClientFormActivity : AppCompatActivity() {
 
@@ -35,7 +36,7 @@ class ClientFormActivity : AppCompatActivity() {
     private lateinit var clientSocialReason: EditText
     private lateinit var clientContactAgent: EditText
 
-    var currentClientName = ""
+    var clientId : Long? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,24 +44,23 @@ class ClientFormActivity : AppCompatActivity() {
         clientViewModel = ClientViewModel((application as ClientApplication).clientRepository)
         addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
-        addEditAddressButton = findViewById<Button>(R.id.edit_button)
-        addEditClientButton = findViewById<Button>(R.id.add_edit_client_button)
+        addEditAddressButton = findViewById(R.id.edit_button)
+        addEditClientButton = findViewById(R.id.add_edit_client_button)
 
-        recyclerView = findViewById<RecyclerView>(R.id.address_recyclerview)
+        recyclerView = findViewById(R.id.address_recyclerview)
 
-        clientName = findViewById<EditText>(R.id.client_name_editText)
-        clientSocialReason = findViewById<EditText>(R.id.social_reason_editText)
-        clientContactAgent = findViewById<EditText>(R.id.contact_agent_editText)
+        clientName = findViewById(R.id.client_name_editText)
+        clientSocialReason = findViewById(R.id.social_reason_editText)
+        clientContactAgent = findViewById(R.id.contact_agent_editText)
 
 
 
-        val incomingClient =  intent.getStringExtra(CLIENT_NAME)
-        if (incomingClient?.isNotEmpty() == true) {
-            currentClientName = incomingClient;
-
+        val incomingClient =  intent.getLongExtra(CLIENT_ID, 0)
+        if (incomingClient > 0) {
+            clientId = incomingClient
 
             lifecycleScope.launch {
-                clientViewModel.getCurrentClient(currentClientName).collect {
+                clientViewModel.getCurrentClient(clientId!!).collect {
                     clientName.setText(it.clientName)
                     clientSocialReason.setText(it.socialReason)
                     clientContactAgent.setText(it.contactAgent)
@@ -80,10 +80,12 @@ class ClientFormActivity : AppCompatActivity() {
             val newClient = getEditingClient()
             if (newClient.clientName.isNotEmpty() && newClient.contactAgent.isNotEmpty()
                 && newClient.socialReason.isNotEmpty()) {
-                clientViewModel.insert(newClient)
-                currentClientName = newClient.clientName
-                enabledAddressSaveButton(newClient.clientName)
+                val id = clientViewModel.insert(newClient)
+                id.observe(this, Observer {
+                clientId = it
+                enabledAddressSaveButton(clientId!!)
                 Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
+                })
             } else {
                 Toast.makeText(this, ":( debe completar todos los campos", Toast.LENGTH_LONG).show()
             }
@@ -103,7 +105,7 @@ class ClientFormActivity : AppCompatActivity() {
     }
 
     fun setupAddresses() {
-        addressViewModel.getAllByClientName(currentClientName).observe(this) { addresses ->
+        addressViewModel.getAllByClientName(clientId!!).observe(this) { addresses ->
             addresses.let {  adapter.submitList(addresses) }
         }
     }
@@ -113,7 +115,7 @@ class ClientFormActivity : AppCompatActivity() {
         val socialReason = clientSocialReason.text.toString()
         val contactAgent =  clientContactAgent.text.toString()
 
-        return Client(buisnessName, socialReason, contactAgent)
+        return Client(null, buisnessName, socialReason, contactAgent)
     }
 
     fun getEditingAddress() : Address {
@@ -132,14 +134,14 @@ class ClientFormActivity : AppCompatActivity() {
         number.text.clear()
         reference.text.clear()
 
-        return Address(clientName = currentClientName, sectorName = sectionValue, streetName = streetValue,
+        return Address(null, clientId = clientId!!, sectorName = sectionValue, streetName = streetValue,
             number = numberValue, reference = referenceValue)
     }
 
-    fun enabledAddressSaveButton(currentName: String) {
-        if (currentName.isNotEmpty()) {
+    fun enabledAddressSaveButton(currentClientId: Long) {
+        if (currentClientId > 0) {
             addEditAddressButton.isEnabled = true
-            currentClientName = currentName
+            clientId = currentClientId
             setupAddresses()
         }
     }
