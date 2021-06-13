@@ -9,6 +9,11 @@ class ClientRepository(private val clientDao: ClientDao) {
 
     val allClients : Flow<List<Client>> = clientDao.getAll() // clientDao.getClients()
 
+    fun getCurrentClient(clientName: String): Flow<Client> {
+        return  clientDao.getCurrentClient(clientName)
+
+    }
+
     @WorkerThread
     suspend fun insert(client: Client) {
         clientDao.insert(client)
