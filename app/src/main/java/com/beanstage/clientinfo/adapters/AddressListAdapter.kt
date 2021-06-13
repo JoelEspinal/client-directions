@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
 import com.beanstage.clientinfo.activities.ADDRESS_ID
 import com.beanstage.clientinfo.activities.AddressActivity
-import com.beanstage.clientinfo.activities.CLIENT_NAME
-import com.beanstage.clientinfo.activities.ClientFormActivity
 import com.beanstage.clientinfo.room.entities.Address
 
 class AddressListAdapter : ListAdapter<Address, AddressListAdapter.AddressViewHolder>(ADDRESS_COMPARATOR)  {
@@ -65,7 +63,7 @@ class AddressListAdapter : ListAdapter<Address, AddressListAdapter.AddressViewHo
 
             override fun areContentsTheSame(old: Address, new: Address): Boolean {
                 return (old.addressId == new.addressId
-                        && old.clientName == new.clientName
+                        && old.clientId == new.clientId
                         && old.sectorName == new.sectorName
                         && old.streetName == new.streetName
                         && old.number == new.number
