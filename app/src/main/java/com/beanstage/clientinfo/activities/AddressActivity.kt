@@ -55,8 +55,13 @@ class AddressActivity : AppCompatActivity() {
             address.streetName =  streetEditText.text.toString()
             address.number =  numberEditText.text.toString()
             address.reference =  referenceEditText.text.toString()
-            addressViewModel.edit(address)
-            Toast.makeText(Address@this, "Editado Correctamente !!", Toast.LENGTH_LONG).show()
+            if (address.sectorName.isNotEmpty() && address.streetName.isNotEmpty()
+                && address.number.isNotEmpty() && address.reference.isNotEmpty()) {
+                addressViewModel.edit(address)
+                Toast.makeText(Address@this, "Editado Correctamente !!", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, ":( Debe completar todos los campos", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
