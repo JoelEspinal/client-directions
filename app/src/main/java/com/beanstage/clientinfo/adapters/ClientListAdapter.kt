@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
-import com.beanstage.clientinfo.activities.CLIENT_NAME
-import com.beanstage.clientinfo.activities.ClientActivity
+import com.beanstage.clientinfo.activities.CLIENT_ID
 import com.beanstage.clientinfo.activities.ClientFormActivity
 import com.beanstage.clientinfo.room.entities.Client
 
@@ -41,7 +39,7 @@ class ClientListAdapter : ListAdapter<Client, ClientListAdapter.ClientViewHolder
 
             constraintLayout.setOnClickListener {
                 val intent = Intent(context, ClientFormActivity::class.java)
-                intent.putExtra(CLIENT_NAME, client?.clientName)
+                intent.putExtra(CLIENT_ID, client?.clientId)
                 context.startActivity(intent)
             }
         }
