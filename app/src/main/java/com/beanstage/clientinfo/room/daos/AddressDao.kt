@@ -1,9 +1,6 @@
 package com.beanstage.clientinfo.room.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.beanstage.clientinfo.room.entities.Address
 import com.beanstage.clientinfo.room.entities.Client
 import kotlinx.coroutines.flow.Flow
@@ -19,6 +16,9 @@ interface AddressDao {
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun insert(address: Address)
+
+        @Update(onConflict = OnConflictStrategy.REPLACE)
+        suspend fun edit(address: Address)
 
         @Query("DELETE FROM address_table")
         suspend fun deleteAll()

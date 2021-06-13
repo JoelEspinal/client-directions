@@ -13,6 +13,11 @@ class AddressRepository(private val addressDao: AddressDao) {
         addressDao.insert(address)
     }
 
+    @WorkerThread
+    suspend fun edit(address: Address) {
+        addressDao.edit(address)
+    }
+
     fun getAddressById(addressId: Long): Flow<Address> {
         return  addressDao.getAddressById(addressId)
     }
