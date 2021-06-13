@@ -3,6 +3,7 @@ package com.beanstage.clientinfo.viewmodels
 import androidx.lifecycle.*
 import com.beanstage.clientinfo.repositories.ClientRepository
 import com.beanstage.clientinfo.room.entities.Client
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
@@ -14,17 +15,12 @@ class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
 //         return clients.asLiveData()
 //    }
 
+     fun getCurrentClient(clientName: String): Flow<Client> {
+        val a = repository.getCurrentClient(clientName)
+         return a
+    }
+
     fun insert(client: Client) = viewModelScope.launch {
         repository.insert(client)
-    }
-}
-
-class ClientViewModelFactory(private val repository: ClientRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ClientViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return ClientViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
