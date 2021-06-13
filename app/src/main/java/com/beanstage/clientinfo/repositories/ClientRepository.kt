@@ -11,7 +11,6 @@ class ClientRepository(private val clientDao: ClientDao) {
 
     fun getCurrentClient(clientName: String): Flow<Client> {
         return  clientDao.getCurrentClient(clientName)
-
     }
 
     @WorkerThread
