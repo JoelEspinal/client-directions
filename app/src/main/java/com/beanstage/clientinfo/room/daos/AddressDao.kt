@@ -14,6 +14,9 @@ interface AddressDao {
         @Query("SELECT * FROM address_table where clientName=:client_name")
         fun getAllByClient(client_name: String): Flow<List<Address>>
 
+        @Query("SELECT * FROM address_table WHERE addressId = :addressId")
+        fun getAddressById(addressId: Long): Flow<Address>
+
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun insert(address: Address)
 

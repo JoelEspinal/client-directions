@@ -13,6 +13,10 @@ class AddressRepository(private val addressDao: AddressDao) {
         addressDao.insert(address)
     }
 
+    fun getAddressById(addressId: Long): Flow<Address> {
+        return  addressDao.getAddressById(addressId)
+    }
+
     fun getAllByClientName(clientName: String) : Flow<List<Address>>{
       return  addressDao.getAllByClient(clientName)
     }
