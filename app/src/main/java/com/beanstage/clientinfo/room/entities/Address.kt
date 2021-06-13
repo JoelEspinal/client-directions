@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "address_table")
 data class Address (
-   @PrimaryKey(autoGenerate = true) val addressId: Long? = null,
+    @PrimaryKey(autoGenerate = true) val addressId: Long? = null,
     val clientName: String,
-    @ColumnInfo(name = "sector_name") val sectorName: String,
-    @ColumnInfo(name = "street_name") val streetName: String = "",
-    @ColumnInfo(name = "number") val number: String = "",
-    @ColumnInfo(name = "reference") val reference: String = "",
+    @ColumnInfo(name = "sector_name") var sectorName: String,
+    @ColumnInfo(name = "street_name") var streetName: String = "",
+    @ColumnInfo(name = "number") var number: String = "",
+    @ColumnInfo(name = "reference") var reference: String = "",
 )
