@@ -7,14 +7,14 @@ import kotlinx.coroutines.flow.Flow
 
 class ClientRepository(private val clientDao: ClientDao) {
 
-    val allClients : Flow<List<Client>> = clientDao.getAll() // clientDao.getClients()
+    val allClients : Flow<List<Client>> = clientDao.getAll()
 
-    fun getCurrentClient(clientName: String): Flow<Client> {
-        return  clientDao.getCurrentClient(clientName)
+    fun getCurrentClient(clientId: Long): Flow<Client> {
+        return  clientDao.getCurrentClient(clientId)
     }
 
     @WorkerThread
-    suspend fun insert(client: Client) {
-        clientDao.insert(client)
+    suspend fun insert(client: Client): Long {
+        return clientDao.insert(client)
     }
 }

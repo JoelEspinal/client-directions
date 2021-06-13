@@ -74,9 +74,9 @@ abstract class ClientRoomDatabase : RoomDatabase() {
             // Not needed if you only populate on creation.
             clientDao.deleteAll()
 
-            clientDao.insert(Client(clientName = "Aguas DG", socialReason = "distribucion de agua", contactAgent = "Adian De Dios"))
-            clientDao.insert( Client(clientName = "Revsoft", socialReason = "consultora de tecnologia", contactAgent = "Samuel Luis"))
-            clientDao.insert( Client(clientName = "Bean Stage", socialReason = "A+D laboratrio", contactAgent = "Joel Espinals"))
+            clientDao.insert(Client(null, clientName = "Aguas DG", socialReason = "distribucion de agua", contactAgent = "Adian De Dios"))
+            clientDao.insert( Client(null, clientName = "Revsoft", socialReason = "consultora de tecnologia", contactAgent = "Samuel Luis"))
+            clientDao.insert( Client(null, clientName = "Bean Stage", socialReason = "A+D laboratrio", contactAgent = "Joel Espinals"))
         }
     }
 }

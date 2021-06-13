@@ -22,7 +22,7 @@ class AddressRepository(private val addressDao: AddressDao) {
         return  addressDao.getAddressById(addressId)
     }
 
-    fun getAllByClientName(clientName: String) : Flow<List<Address>>{
-      return  addressDao.getAllByClient(clientName)
+    fun getAllByClientName(clientId: Long) : Flow<List<Address>>{
+      return  addressDao.getAllByClient(clientId)
     }
 }

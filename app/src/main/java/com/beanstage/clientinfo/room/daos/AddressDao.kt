@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface AddressDao {
 
-        @Query("SELECT * FROM address_table where clientName=:client_name")
-        fun getAllByClient(client_name: String): Flow<List<Address>>
+        @Query("SELECT * FROM address_table where clientId=:clientId")
+        fun getAllByClient(clientId: Long): Flow<List<Address>>
 
         @Query("SELECT * FROM address_table WHERE addressId = :addressId")
         fun getAddressById(addressId: Long): Flow<Address>

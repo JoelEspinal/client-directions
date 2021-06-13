@@ -9,17 +9,17 @@ import kotlinx.coroutines.launch
 class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
     val allClients: LiveData<List<Client>> = repository.allClients.asLiveData()
 
-//     val  allClients() : LiveData<List<Client>>{
-//        var clients = repository.allClients
-//
-//         return clients.asLiveData()
-//    }
-
-     fun getCurrentClient(clientName: String): Flow<Client> {
-       return repository.getCurrentClient(clientName)
+     fun getCurrentClient(clientId: Long): Flow<Client> {
+       return repository.getCurrentClient(clientId)
     }
 
-    fun insert(client: Client) = viewModelScope.launch {
-        repository.insert(client)
+    fun insert(client: Client): LiveData<Long?> {
+        val insertedId = MutableLiveData<Long?>()
+
+        viewModelScope.launch {
+            val value =  repository.insert(client)
+            insertedId.postValue(value)
+        }
+        return insertedId
     }
 }
