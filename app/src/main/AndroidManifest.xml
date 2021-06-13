@@ -11,10 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClientInfo">
         <activity android:name=".activities.ClientFormActivity"></activity>
-        <activity android:name=".activities.SplashActivity">
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/SplashTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
