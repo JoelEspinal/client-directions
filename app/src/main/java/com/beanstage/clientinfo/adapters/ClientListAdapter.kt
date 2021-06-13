@@ -1,13 +1,19 @@
 package com.beanstage.clientinfo.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
+import com.beanstage.clientinfo.activities.CLIENT_NAME
+import com.beanstage.clientinfo.activities.ClientActivity
+import com.beanstage.clientinfo.activities.ClientFormActivity
 import com.beanstage.clientinfo.room.entities.Client
 
 class ClientListAdapter : ListAdapter<Client, ClientListAdapter.ClientViewHolder>(CLIENT_COMPARATOR) {
@@ -22,6 +28,8 @@ class ClientListAdapter : ListAdapter<Client, ClientListAdapter.ClientViewHolder
     }
 
     class ClientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val context = itemView.context
+        private val constraintLayout: ConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.client_item)
         private val clientNameTextView: TextView = itemView.findViewById(R.id.sector_textview)
         private val socialReason: TextView = itemView.findViewById(R.id.street_textview)
         private val agentNameTextView: TextView = itemView.findViewById(R.id.number_textview)
@@ -30,6 +38,12 @@ class ClientListAdapter : ListAdapter<Client, ClientListAdapter.ClientViewHolder
             clientNameTextView.text = client?.clientName
             socialReason.text = client?.socialReason
             agentNameTextView.text = client?.contactAgent
+
+            constraintLayout.setOnClickListener {
+                val intent = Intent(context, ClientFormActivity::class.java)
+                intent.putExtra(CLIENT_NAME, client?.clientName)
+                context.startActivity(intent)
+            }
         }
 
         companion object {
