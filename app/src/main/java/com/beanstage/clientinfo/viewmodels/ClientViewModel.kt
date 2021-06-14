@@ -2,6 +2,7 @@ package com.beanstage.clientinfo.viewmodels
 
 import androidx.lifecycle.*
 import com.beanstage.clientinfo.repositories.ClientRepository
+import com.beanstage.clientinfo.room.entities.Address
 import com.beanstage.clientinfo.room.entities.Client
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -21,5 +22,9 @@ class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
             insertedId.postValue(value)
         }
         return insertedId
+    }
+
+    fun edit(client: Client) = viewModelScope.launch {
+        repository.edit(client)
     }
 }
