@@ -80,5 +80,16 @@
             android:text="Editar"
             app:layout_constraintEnd_toEndOf="@+id/address_reference_editText"
             app:layout_constraintTop_toBottomOf="@+id/address_reference_editText" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="131dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:hapticFeedbackEnabled="false"
+            android:text="Eliminar"
+            app:layout_constraintEnd_toStartOf="@+id/edit_button"
+            app:layout_constraintTop_toTopOf="@+id/edit_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

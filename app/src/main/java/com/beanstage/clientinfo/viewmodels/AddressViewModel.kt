@@ -25,4 +25,8 @@ class AddressViewModel(private val repository: AddressRepository) : ViewModel(){
     fun edit(address: Address) = viewModelScope.launch {
         repository.edit(address)
     }
+
+    fun delete(address: Address) = viewModelScope.launch {
+        repository.delete(address)
+    }
 }

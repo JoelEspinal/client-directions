@@ -23,4 +23,6 @@ interface AddressDao {
         @Query("DELETE FROM address_table")
         suspend fun deleteAll()
 
+        @Delete
+        suspend fun delete(address: Address)
 }
