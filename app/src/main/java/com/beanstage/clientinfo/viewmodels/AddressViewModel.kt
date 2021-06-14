@@ -10,9 +10,7 @@ import kotlinx.coroutines.launch
 
 class AddressViewModel(private val repository: AddressRepository) : ViewModel(){
 
-//        val allClients: LiveData<List<Client>> =
-
-     fun getAllByClientName(clientId: Long): LiveData<List<Address>> {
+ fun getAllByClientName(clientId: Long): LiveData<List<Address>> {
        return  repository.getAllByClientName(clientId).asLiveData()
     }
 

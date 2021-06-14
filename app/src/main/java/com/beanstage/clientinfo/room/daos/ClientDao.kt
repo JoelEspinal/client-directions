@@ -1,9 +1,7 @@
 package com.beanstage.clientinfo.room.daos
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.beanstage.clientinfo.room.entities.Address
 import com.beanstage.clientinfo.room.entities.Client
 import kotlinx.coroutines.flow.Flow
 
@@ -23,4 +21,7 @@ interface ClientDao {
 
     @Query("DELETE FROM client_table")
     suspend fun deleteAll()
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun edit(client: Client)
 }

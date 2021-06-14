@@ -80,12 +80,19 @@ class ClientFormActivity : AppCompatActivity() {
             val newClient = getEditingClient()
             if (newClient.clientName.isNotEmpty() && newClient.contactAgent.isNotEmpty()
                 && newClient.socialReason.isNotEmpty()) {
-                val id = clientViewModel.insert(newClient)
-                id.observe(this, Observer {
-                clientId = it
-                enabledAddressSaveButton(clientId!!)
-                Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
-                })
+                    if (clientId!! > 0) {
+                       var editedClient = getEditingClient()
+                       editedClient.clientId = clientId
+
+                        clientViewModel.edit(editedClient)
+                    } else {
+                        val id = clientViewModel.insert(newClient)
+                        id.observe(this, Observer {
+                            clientId = it
+                            enabledAddressSaveButton(clientId!!)
+                            Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
+                        })
+                    }
             } else {
                 Toast.makeText(this, ":( debe completar todos los campos", Toast.LENGTH_LONG).show()
             }
