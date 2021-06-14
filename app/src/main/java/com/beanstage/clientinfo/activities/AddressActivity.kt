@@ -23,8 +23,10 @@ class AddressActivity : AppCompatActivity() {
     private lateinit var numberEditText: EditText
     private lateinit var referenceEditText: EditText
     private lateinit var editButton: Button
+    private lateinit var deleteButton: Button
 
-    private lateinit var address: Address
+
+      var address: Address? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,36 +34,47 @@ class AddressActivity : AppCompatActivity() {
         setContentView(R.layout.activity_address)
         addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
-        sectionEditText = findViewById(R.id.sector_editText)
-        streetEditText = findViewById(R.id.street_editText)
-        numberEditText = findViewById(R.id.number_editText)
-        referenceEditText = findViewById(R.id.address_reference_editText)
-        editButton = findViewById(R.id.edit_button)
+            sectionEditText = findViewById(R.id.sector_editText)
+            streetEditText = findViewById(R.id.street_editText)
+            numberEditText = findViewById(R.id.number_editText)
+            referenceEditText = findViewById(R.id.address_reference_editText)
+            editButton = findViewById(R.id.edit_button)
+            deleteButton = findViewById(R.id.delete_button)
 
         val addressId =  intent.getLongExtra(ADDRESS_ID, 0)
 
         lifecycleScope.launch {
             addressViewModel.getAddressById(addressId).collect {
-                address = it
-                sectionEditText.setText(it.sectorName)
-                streetEditText.setText(it.streetName)
-                numberEditText.setText(it.number)
-                referenceEditText.setText(it.reference)
+                if (it != null) {
+                    address = it
+                    sectionEditText.setText(it.sectorName)
+                    streetEditText.setText(it.streetName)
+                    numberEditText.setText(it.number)
+                    referenceEditText.setText(it.reference)
+                }
             }
         }
 
         editButton.setOnClickListener {
-            address.sectorName =  sectionEditText.text.toString()
-            address.streetName =  streetEditText.text.toString()
-            address.number =  numberEditText.text.toString()
-            address.reference =  referenceEditText.text.toString()
-            if (address.sectorName.isNotEmpty() && address.streetName.isNotEmpty()
-                && address.number.isNotEmpty() && address.reference.isNotEmpty()) {
-                addressViewModel.edit(address)
-                Toast.makeText(this, "Editado Correctamente !!", Toast.LENGTH_LONG).show()
+            address?.sectorName =  sectionEditText.text.toString()
+            address?.streetName =  streetEditText.text.toString()
+            address?.number =  numberEditText.text.toString()
+            address?.reference =  referenceEditText.text.toString()
+            if (address?.sectorName!!.isNotEmpty() && address?.streetName!!.isNotEmpty()
+                && address?.number!!.isNotEmpty() && address?.reference!!.isNotEmpty()) {
+                    if (address != null) {
+                        addressViewModel.edit(address!!)
+                        Toast.makeText(this, "Editado Correctamente !!", Toast.LENGTH_LONG).show()
+                    }
             } else {
                 Toast.makeText(this, ":( Debe completar todos los campos", Toast.LENGTH_LONG).show()
             }
+        }
+
+        deleteButton.setOnClickListener {
+                address?.addressId = addressId
+                addressViewModel.delete(address!!)
+                finish()
         }
     }
 }
