@@ -127,7 +127,7 @@ class ClientFormActivity : AppCompatActivity() {
 
     fun getEditingAddress() : Address {
         val section = findViewById<EditText>(R.id.sector_editText)
-        val street = findViewById<EditText>(R.id.street_editText)
+        val street = findViewById<EditText>(R.id.street_textview)
         val number = findViewById<EditText>(R.id.number_editText)
         val reference = findViewById<EditText>(R.id.address_reference_editText)
 

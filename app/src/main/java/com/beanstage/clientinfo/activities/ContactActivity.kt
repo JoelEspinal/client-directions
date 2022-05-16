@@ -22,7 +22,7 @@ class ContactActivity : AppCompatActivity() {
 
         viewModel = ContactViewModel((application as ContactApplication).ContactRepository)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.contact_item)
+        val recyclerView = findViewById<RecyclerView>(R.id.contact_recyclerview)
         val adapter = ContactListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -31,9 +31,9 @@ class ContactActivity : AppCompatActivity() {
             contacts.let {  adapter.submitList(contacts) }
         }
 
-        val fab = findViewById<FloatingActionButton>(R.id.new_contact_fab)
+        val fab = findViewById<FloatingActionButton>(R.id.new_client_fab)
         fab.setOnClickListener {
-            val intent = Intent(this, ClientFormActivity::class.java)
+            val intent = Intent(this, ContactFormActivity::class.java)
             startActivity(intent)
         }
     }

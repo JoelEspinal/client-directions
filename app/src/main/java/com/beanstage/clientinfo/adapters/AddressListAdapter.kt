@@ -28,9 +28,9 @@ class AddressListAdapter : ListAdapter<Address, AddressListAdapter.AddressViewHo
     class AddressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val context = itemView.context
         private val constraintLayout: ConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.address_item)
-        private val sectorTextView: TextView = itemView.findViewById(R.id.name_textview)
-        private val streetTextView: TextView = itemView.findViewById(R.id.last_name_textview)
-        private val numberTextView: TextView = itemView.findViewById(R.id.refernce_textview)
+        private val sectorTextView: TextView = itemView.findViewById(R.id.sector_editText)
+        private val streetTextView: TextView = itemView.findViewById(R.id.street_textview)
+        private val numberTextView: TextView = itemView.findViewById(R.id.number_editText)
         private val referenceTextView: TextView = itemView.findViewById(R.id.referernce_textview)
 
         fun bind(address: Address?) {

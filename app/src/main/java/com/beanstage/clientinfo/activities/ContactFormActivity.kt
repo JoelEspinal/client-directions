@@ -18,6 +18,7 @@ import com.beanstage.clientinfo.viewmodels.ClientViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import androidx.lifecycle.lifecycleScope
+import com.beanstage.clientinfo.app.ContactApplication
 
 const val CONTACT_ID = "CLIENT_ID"
 
@@ -38,11 +39,19 @@ class ContactFormActivity : AppCompatActivity() {
 
     var clientId : Long? = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_client_form)
-        clientViewModel = ClientViewModel((application as ClientApplication).clientRepository)
-        addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
+        setContentView(R.layout.activity_contact_form)
+    }
+
+
+//    override
+    fun onCreate2(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_contact_form)
+//        clientViewModel = ClientViewModel((application as ContactApplication).ContactRepository)
+//        addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
         addEditAddressButton = findViewById(R.id.edit_button)
         addEditClientButton = findViewById(R.id.add_edit_client_button)
@@ -76,27 +85,27 @@ class ContactFormActivity : AppCompatActivity() {
 
         setupAddresses()
 
-        addEditClientButton.setOnClickListener {
-            val newClient = getEditingClient()
-            if (newClient.clientName.isNotEmpty() && newClient.contactAgent.isNotEmpty()
-                && newClient.socialReason.isNotEmpty()) {
-                    if (clientId!! > 0) {
-                       var editedClient = getEditingClient()
-                       editedClient.clientId = clientId
-
-                        clientViewModel.edit(editedClient)
-                    } else {
-                        val id = clientViewModel.insert(newClient)
-                        id.observe(this, Observer {
-                            clientId = it
-                            enabledAddressSaveButton(clientId!!)
-                            Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
-                        })
-                    }
-            } else {
-                Toast.makeText(this, ":( debe completar todos los campos", Toast.LENGTH_LONG).show()
-            }
-        }
+//        addEditClientButton.setOnClickListener {
+//            val newClient = getEditingClient()
+//            if (newClient.clientName.isNotEmpty() && newClient.contactAgent.isNotEmpty()
+//                && newClient.socialReason.isNotEmpty()) {
+//                    if (clientId!! > 0) {
+//                       var editedClient = getEditingClient()
+//                       editedClient.clientId = clientId
+//
+//                        clientViewModel.edit(editedClient)
+//                    } else {
+//                        val id = clientViewModel.insert(newClient)
+//                        id.observe(this, Observer {
+//                            clientId = it
+//                            enabledAddressSaveButton(clientId!!)
+//                            Toast.makeText(this, "Guardado exitoso !!!", Toast.LENGTH_LONG).show()
+//                        })
+//                    }
+//            } else {
+//                Toast.makeText(this, ":( debe completar todos los campos", Toast.LENGTH_LONG).show()
+//            }
+//        }
 
         addEditAddressButton.setOnClickListener {
             val newAddress = getEditingAddress()
@@ -117,13 +126,13 @@ class ContactFormActivity : AppCompatActivity() {
         }
     }
 
-    fun getEditingClient() : Client {
-        val buisnessName = clientName.text.toString()
-        val socialReason = clientSocialReason.text.toString()
-        val contactAgent =  clientContactAgent.text.toString()
-
-        return Client(null, buisnessName, socialReason, contactAgent)
-    }
+//    fun getEditingClient() : Client {
+//        val buisnessName = clientName.text.toString()
+//        val socialReason = clientSocialReason.text.toString()
+//        val contactAgent =  clientContactAgent.text.toString()
+//
+//        return Client(null, buisnessName, socialReason, contactAgent)
+//    }
 
     fun getEditingAddress() : Address {
         val section = findViewById<EditText>(R.id.name_editText)

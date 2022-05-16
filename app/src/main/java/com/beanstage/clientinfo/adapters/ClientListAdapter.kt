@@ -28,9 +28,9 @@ class ClientListAdapter : ListAdapter<Client, ClientListAdapter.ClientViewHolder
     class ClientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val context = itemView.context
         private val constraintLayout: ConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.client_item)
-        private val clientNameTextView: TextView = itemView.findViewById(R.id.sector_textview)
-        private val socialReason: TextView = itemView.findViewById(R.id.street_textview)
-        private val agentNameTextView: TextView = itemView.findViewById(R.id.number_textview)
+        private val clientNameTextView: TextView = itemView.findViewById(R.id.sector_editText)
+        private val socialReason: TextView = itemView.findViewById(R.id.street_editText)
+        private val agentNameTextView: TextView = itemView.findViewById(R.id.number_editText)
 
         fun bind(client: Client?) {
             clientNameTextView.text = client?.clientName
