@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="DG Aguas" />
+        tools:text="Joel A. Espinal" />
 
     <TextView
         android:id="@+id/refernce_textview"
@@ -40,7 +40,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Empresa:"
+        android:text="Nombre:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/name_textview" />
 
@@ -48,7 +48,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Razon Social:"
+        android:text="Apellido"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_textview" />
 
@@ -56,7 +56,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Representante:"
+        android:text="Referencia:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last_name_textview" />
 </androidx.constraintlayout.widget.ConstraintLayout>

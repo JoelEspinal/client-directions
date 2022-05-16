@@ -34,9 +34,9 @@ class AddressActivity : AppCompatActivity() {
         setContentView(R.layout.activity_address)
         addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
-            sectionEditText = findViewById(R.id.sector_editText)
-            streetEditText = findViewById(R.id.street_editText)
-            numberEditText = findViewById(R.id.number_editText)
+            sectionEditText = findViewById(R.id.name_editText)
+            streetEditText = findViewById(R.id.last_name_editText)
+            numberEditText = findViewById(R.id.reference_editText)
             referenceEditText = findViewById(R.id.address_reference_editText)
             editButton = findViewById(R.id.edit_button)
             deleteButton = findViewById(R.id.delete_button)

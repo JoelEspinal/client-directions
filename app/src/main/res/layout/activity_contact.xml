@@ -29,7 +29,7 @@
             android:layout_height="38dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="nombre"
+            android:hint="Sector"
             android:inputType="textCapWords"
             app:layout_constraintEnd_toEndOf="@+id/textView6"
             app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -41,11 +41,23 @@
             android:layout_height="44dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="Apellido"
+            android:hint="Calle"
             android:inputType="textCapWords"
             app:layout_constraintEnd_toEndOf="@+id/name_editText"
             app:layout_constraintStart_toStartOf="@+id/name_editText"
             app:layout_constraintTop_toBottomOf="@+id/name_editText" />
+
+        <EditText
+            android:id="@+id/address_reference_editText"
+            android:layout_width="374dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Referencia"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="@+id/reference_editText"
+            app:layout_constraintStart_toStartOf="@+id/reference_editText"
+            app:layout_constraintTop_toBottomOf="@+id/reference_editText" />
 
         <EditText
             android:id="@+id/reference_editText"
@@ -53,7 +65,7 @@
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="Referncia"
+            android:hint="Numero"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/last_name_editText"
             app:layout_constraintHorizontal_bias="0.4"
@@ -64,9 +76,10 @@
             android:id="@+id/edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Editar"
-            tools:layout_editor_absoluteX="305dp"
-            tools:layout_editor_absoluteY="260dp" />
+            app:layout_constraintEnd_toEndOf="@+id/address_reference_editText"
+            app:layout_constraintTop_toBottomOf="@+id/address_reference_editText" />
 
         <Button
             android:id="@+id/delete_button"

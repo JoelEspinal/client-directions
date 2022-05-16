@@ -55,7 +55,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <EditText
-                android:id="@+id/sector_editText"
+                android:id="@+id/name_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -66,15 +66,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <EditText
-                android:id="@+id/street_editText"
+                android:id="@+id/last_name_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="Calle"
                 android:inputType="textCapWords"
-                app:layout_constraintStart_toStartOf="@+id/sector_editText"
-                app:layout_constraintTop_toBottomOf="@+id/sector_editText" />
+                app:layout_constraintStart_toStartOf="@+id/name_editText"
+                app:layout_constraintTop_toBottomOf="@+id/name_editText" />
 
             <EditText
                 android:id="@+id/address_reference_editText"
@@ -84,19 +84,19 @@
                 android:ems="10"
                 android:hint="Referencia"
                 android:inputType="textMultiLine"
-                app:layout_constraintStart_toStartOf="@+id/number_editText"
-                app:layout_constraintTop_toBottomOf="@+id/number_editText" />
+                app:layout_constraintStart_toStartOf="@+id/reference_editText"
+                app:layout_constraintTop_toBottomOf="@+id/reference_editText" />
 
             <EditText
-                android:id="@+id/number_editText"
+                android:id="@+id/reference_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
                 android:ems="10"
                 android:hint="Numero"
                 android:inputType="number"
-                app:layout_constraintStart_toStartOf="@+id/street_editText"
-                app:layout_constraintTop_toBottomOf="@+id/street_editText" />
+                app:layout_constraintStart_toStartOf="@+id/last_name_editText"
+                app:layout_constraintTop_toBottomOf="@+id/last_name_editText" />
 
             <EditText
                 android:id="@+id/social_reason_editText"
