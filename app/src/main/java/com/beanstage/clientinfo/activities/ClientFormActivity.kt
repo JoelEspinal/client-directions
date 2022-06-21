@@ -41,8 +41,8 @@ class ClientFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client_form)
-        clientViewModel = ClientViewModel((application as ClientApplication).clientRepository)
-        addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
+//        clientViewModel = ClientViewModel((application as ClientApplication).clientRepository)
+//        addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
         addEditAddressButton = findViewById(R.id.edit_button)
         addEditClientButton = findViewById(R.id.add_edit_client_button)
@@ -126,23 +126,24 @@ class ClientFormActivity : AppCompatActivity() {
     }
 
     fun getEditingAddress() : Address {
-        val section = findViewById<EditText>(R.id.sector_editText)
-        val street = findViewById<EditText>(R.id.street_textview)
-        val number = findViewById<EditText>(R.id.number_editText)
+//        val section = findViewById<EditText>(R.id.sector_editText)
+//        val street = findViewById<EditText>(R.id.street_textview)
+//        val number = findViewById<EditText>(R.id.number_editText)
         val reference = findViewById<EditText>(R.id.address_reference_editText)
 
-        val sectionValue = section.text.toString()
-        val streetValue = street.text.toString()
-        val numberValue = number.text.toString()
-        val referenceValue = reference.text.toString()
+//        val sectionValue = section.text.toString()
+//        val streetValue = street.text.toString()
+//        val numberValue = number.text.toString()
+//        val referenceValue = reference.text.toString()
+//
+//        section.text.clear()
+//        street.text.clear()
+//        number.text.clear()
+//        reference.text.clear()
 
-        section.text.clear()
-        street.text.clear()
-        number.text.clear()
-        reference.text.clear()
-
-        return Address(null, clientId = clientId!!, sectorName = sectionValue, streetName = streetValue,
-            number = numberValue, reference = referenceValue)
+//        return Address(null, clientId = clientId!!, sectorName = sectionValue, streetName = streetValue,
+//            number = numberValue, reference = referenceValue)
+        return Address(null, 0, "")
     }
 
     fun enabledAddressSaveButton(currentClientId: Long) {

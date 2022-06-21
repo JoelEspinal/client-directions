@@ -23,16 +23,16 @@ class ClientActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.client_activity)
 
-        viewModel = ClientViewModel((application as ClientApplication).clientRepository)
+//        viewModel = ClientViewModel((application as ClientApplication).clientRepository)
 
         val recyclerView = findViewById<RecyclerView>(R.id.client_recyclerview)
         val adapter = ClientListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        viewModel.allClients.observe(this) { clients ->
-            clients.let {  adapter.submitList(clients) }
-        }
+//
+//        viewModel.allClients.observe(this) { clients ->
+//            clients.let {  adapter.submitList(clients) }
+//        }
 
         val fab = findViewById<FloatingActionButton>(R.id.new_client_fab)
         fab.setOnClickListener {

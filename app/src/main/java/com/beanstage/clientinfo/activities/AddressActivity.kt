@@ -32,7 +32,7 @@ class AddressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_address)
-        addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
+//        addressViewModel = AddressViewModel((application as ClientApplication).addressRepository)
 
             sectionEditText = findViewById(R.id.name_editText)
             streetEditText = findViewById(R.id.last_name_editText)
@@ -44,15 +44,15 @@ class AddressActivity : AppCompatActivity() {
         val addressId =  intent.getLongExtra(ADDRESS_ID, 0)
 
         lifecycleScope.launch {
-            addressViewModel.getAddressById(addressId).collect {
-                if (it != null) {
-                    address = it
-                    sectionEditText.setText(it.sectorName)
-                    streetEditText.setText(it.streetName)
-                    numberEditText.setText(it.number)
-                    referenceEditText.setText(it.reference)
-                }
-            }
+//            addressViewModel.getAddressById(addressId).collect {
+//                if (it != null) {
+//                    address = it
+//                    sectionEditText.setText(it.sectorName)
+//                    streetEditText.setText(it.streetName)
+//                    numberEditText.setText(it.number)
+//                    referenceEditText.setText(it.reference)
+//                }
+//            }
         }
 
         editButton.setOnClickListener {
@@ -63,7 +63,7 @@ class AddressActivity : AppCompatActivity() {
             if (address?.sectorName!!.isNotEmpty() && address?.streetName!!.isNotEmpty()
                 && address?.number!!.isNotEmpty() && address?.reference!!.isNotEmpty()) {
                     if (address != null) {
-                        addressViewModel.edit(address!!)
+//                        addressViewModel.edit(address!!)
                         Toast.makeText(this, "Editado Correctamente !!", Toast.LENGTH_LONG).show()
                     }
             } else {

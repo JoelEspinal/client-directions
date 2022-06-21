@@ -27,7 +27,7 @@
         <activity android:name=".activities.ClientActivity"
             android:label="@string/clients"/>
         <activity android:name=".activities.ContactActivity"
-            android:label="@string/clients">
+            android:label="@string/contacts">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

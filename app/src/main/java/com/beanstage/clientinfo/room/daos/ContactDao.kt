@@ -1,6 +1,7 @@
 package com.beanstage.clientinfo.room.daos
 
 import androidx.room.*
+import com.beanstage.clientinfo.room.entities.Client
 import com.beanstage.clientinfo.room.entities.Contact
 import kotlinx.coroutines.flow.Flow
 

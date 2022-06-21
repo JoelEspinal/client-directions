@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
 import com.beanstage.clientinfo.activities.ADDRESS_ID
-import com.beanstage.clientinfo.activities.AddressActivity
+import com.beanstage.clientinfo.activities.CONTACT_ID
+import com.beanstage.clientinfo.activities.ContactFormActivity
 import com.beanstage.clientinfo.room.entities.Contact
 
 class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHolder>(CONTACT_COMPARATOR)  {
@@ -27,7 +28,7 @@ class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHo
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val context = itemView.context
-        private val constraintLayout: ConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.contact_item)
+        private val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.contact_item)
         private val nameTextView: TextView = itemView.findViewById(R.id.sector_editText)
         private val lastNameTextView: TextView = itemView.findViewById(R.id.street_textview)
         private val referenceTextView: TextView = itemView.findViewById(R.id.number_editText)
@@ -38,7 +39,7 @@ class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHo
             referenceTextView.text = contact?.reference
 
             constraintLayout.setOnClickListener {
-                val intent = Intent(context, AddressActivity::class.java)
+                val intent = Intent(context, ContactFormActivity::class.java)
                 intent.putExtra(ADDRESS_ID, contact?.contactId)
                 context.startActivity(intent)
             }

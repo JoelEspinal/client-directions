@@ -3,4 +3,5 @@
     <string name="address_form">Formulario Direccion</string>
     <string name="info_form">Formulario</string>
     <string name="clients">Clientes</string>
+    <string name="contacts">Contactos</string>
 </resources>

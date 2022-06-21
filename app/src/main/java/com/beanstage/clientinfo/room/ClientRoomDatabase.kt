@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [Client::class, Address::class], version = 1)
+@Database(entities = [Client::class, Address::class], version = 1, exportSchema = false)
 abstract class ClientRoomDatabase : RoomDatabase() {
 
     abstract fun clientDao(): ClientDao

@@ -2,8 +2,10 @@ package com.beanstage.clientinfo.viewmodels
 
 import androidx.lifecycle.*
 import com.beanstage.clientinfo.repositories.ClientRepository
+import com.beanstage.clientinfo.repositories.ContactRepository
 import com.beanstage.clientinfo.room.entities.Address
 import com.beanstage.clientinfo.room.entities.Client
+import com.beanstage.clientinfo.room.entities.Contact
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 

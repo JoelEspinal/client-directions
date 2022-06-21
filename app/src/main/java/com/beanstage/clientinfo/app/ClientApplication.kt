@@ -7,11 +7,12 @@ import com.beanstage.clientinfo.room.ClientRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
-class ClientApplication : Application() {
+class ClientApplication /*: Application() */{
 
     private val applicationScope = CoroutineScope(SupervisorJob())
 
-    val database by lazy { ClientRoomDatabase.getDatabase(this, applicationScope) }
-    val clientRepository by lazy { ClientRepository(database.clientDao()) }
-    val addressRepository by lazy { AddressRepository(database.addressDao()) }
+//    val database by lazy { ClientRoomDatabase.getDatabase(this, applicationScope) }
+//
+//    val clientRepository by lazy { ClientRepository(database.clientDao()) }
+//    val addressRepository by lazy { AddressRepository(database.addressDao()) }
 }

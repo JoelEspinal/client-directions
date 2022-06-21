@@ -9,8 +9,8 @@ import kotlinx.coroutines.launch
 class ContactViewModel(private val repository: ContactRepository) : ViewModel() {
     val allContacts: LiveData<List<Contact>> = repository.allContacts.asLiveData()
 
-    fun getContactById(contactId: Long): Flow<Contact> {
-        return repository.getContactById(contactId)
+    suspend fun getContactById(contactId: Long): LiveData<Contact> {
+        return repository.getContactById(contactId).asLiveData()
     }
 
     fun insert(contact: Contact): LiveData<Long?> {
