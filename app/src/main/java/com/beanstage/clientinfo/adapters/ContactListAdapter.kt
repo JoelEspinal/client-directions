@@ -1,10 +1,14 @@
 package com.beanstage.clientinfo.adapters
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -32,6 +36,7 @@ class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHo
         private val nameTextView: TextView = itemView.findViewById(R.id.sector_editText)
         private val lastNameTextView: TextView = itemView.findViewById(R.id.street_textview)
         private val referenceTextView: TextView = itemView.findViewById(R.id.number_editText)
+        private val deleteButton: Button = itemView.findViewById(R.id.delete_button)
 
         fun bind(contact: Contact?) {
             nameTextView.text = contact?.name
@@ -40,11 +45,31 @@ class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHo
 
             constraintLayout.setOnClickListener {
                 val intent = Intent(context, ContactFormActivity::class.java)
-                intent.putExtra(ADDRESS_ID, contact?.contactId)
+                intent.putExtra(CONTACT_ID, contact?.contactId)
                 context.startActivity(intent)
+            }
+
+            deleteButton.setOnClickListener {
+                contact?.contactId?.let { it1 -> setupDeleteDialog(context, it1) }
             }
         }
 
+        fun setupDeleteDialog(context: Context, contactId: Long) {
+            val builder = AlertDialog.Builder(context)
+            builder.setMessage(R.string.delete_contact_message)
+                .setPositiveButton(R.string.delete_confirmation_message,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        // START THE GAME!
+                    })
+                .setNegativeButton(R.string.cancel_deleting_message,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        // User cancelled the dialog
+                    })
+            // Create the AlertDialog object and return it
+            builder.create()
+
+            builder.show()
+        }
         companion object {
             fun create(parent: ViewGroup): ContactViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
@@ -68,4 +93,6 @@ class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHo
             }
         }
     }
+
+
 }

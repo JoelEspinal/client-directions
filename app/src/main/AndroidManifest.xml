@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.ContactFormActivity"
-            android:label="@string/clients"/>
+            android:label="@string/contacts"/>
     </application>
 
 </manifest>

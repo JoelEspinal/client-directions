@@ -4,4 +4,7 @@
     <string name="info_form">Formulario</string>
     <string name="clients">Clientes</string>
     <string name="contacts">Contactos</string>
+    <string name="delete_contact_message">Seguro desea eliminar este contacto?</string>
+    <string name="delete_confirmation_message">Si, eliminar</string>
+    <string name="cancel_deleting_message">cancelar</string>
 </resources>
