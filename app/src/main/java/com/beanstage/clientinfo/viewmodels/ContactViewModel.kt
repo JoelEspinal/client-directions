@@ -26,4 +26,10 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel() 
     fun edit(contact: Contact) = viewModelScope.launch {
         repository.edit(contact)
     }
+
+     fun delete(contact: Contact) {
+         viewModelScope.launch {
+             repository.delete(contact)
+         }
+    }
 }

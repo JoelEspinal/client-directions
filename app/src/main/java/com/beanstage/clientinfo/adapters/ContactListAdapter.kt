@@ -14,31 +14,33 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
-import com.beanstage.clientinfo.activities.ADDRESS_ID
 import com.beanstage.clientinfo.activities.CONTACT_ID
 import com.beanstage.clientinfo.activities.ContactFormActivity
 import com.beanstage.clientinfo.room.entities.Contact
+import com.beanstage.clientinfo.viewmodels.ContactViewModel
 
-class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHolder>(CONTACT_COMPARATOR)  {
+class ContactListAdapter(val contactViewModel: ContactViewModel): ListAdapter<Contact, ContactListAdapter.ContactViewHolder>(CONTACT_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        return ContactViewHolder.create(parent)
+        return ContactViewHolder.create(parent, contactViewModel)
     }
 
     override fun onBindViewHolder(holder: ContactListAdapter.ContactViewHolder, position: Int) {
         val currentContact = getItem(position)
-        holder.bind(currentContact)
+        holder.bind(currentContact, contactViewModel)
     }
 
-    class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ContactViewHolder(itemView: View, viewModel: ContactViewModel) : RecyclerView.ViewHolder(itemView) {
         val context = itemView.context
+
         private val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.contact_item)
         private val nameTextView: TextView = itemView.findViewById(R.id.sector_editText)
         private val lastNameTextView: TextView = itemView.findViewById(R.id.street_textview)
         private val referenceTextView: TextView = itemView.findViewById(R.id.number_editText)
         private val deleteButton: Button = itemView.findViewById(R.id.delete_button)
 
-        fun bind(contact: Contact?) {
+        fun bind(contact: Contact?, contactViewModel: ContactViewModel) {
+
             nameTextView.text = contact?.name
             lastNameTextView.text = contact?.lastName
             referenceTextView.text = contact?.reference
@@ -50,16 +52,17 @@ class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHo
             }
 
             deleteButton.setOnClickListener {
-                contact?.contactId?.let { it1 -> setupDeleteDialog(context, it1) }
+                contact?.let { it -> setupDeleteDialog(context,contactViewModel, contact) }
             }
         }
 
-        fun setupDeleteDialog(context: Context, contactId: Long) {
+       fun setupDeleteDialog(context: Context, contactViewModel: ContactViewModel, contact: Contact) {
+
             val builder = AlertDialog.Builder(context)
             builder.setMessage(R.string.delete_contact_message)
                 .setPositiveButton(R.string.delete_confirmation_message,
                     DialogInterface.OnClickListener { dialog, id ->
-                        // START THE GAME!
+                            contactViewModel.delete(contact)
                     })
                 .setNegativeButton(R.string.cancel_deleting_message,
                     DialogInterface.OnClickListener { dialog, id ->
@@ -71,10 +74,10 @@ class ContactListAdapter : ListAdapter<Contact, ContactListAdapter.ContactViewHo
             builder.show()
         }
         companion object {
-            fun create(parent: ViewGroup): ContactViewHolder {
+            fun create(parent: ViewGroup, contactViewModel: ContactViewModel): ContactViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recycleview_contact_item, parent, false)
-                return ContactViewHolder(view)
+                return ContactViewHolder(view, contactViewModel)
             }
         }
     }

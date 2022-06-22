@@ -20,6 +20,9 @@ interface ContactDao {
     @Query("DELETE FROM contact_table")
     suspend fun deleteAll()
 
+    @Query("DELETE FROM contact_table where contactId = :contactId")
+    suspend fun deleteContact(contactId: Long)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun edit(client: Contact)
 }

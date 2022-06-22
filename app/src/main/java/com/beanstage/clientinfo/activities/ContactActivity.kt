@@ -23,7 +23,7 @@ class ContactActivity : AppCompatActivity() {
         viewModel = ContactViewModel((application as ContactApplication).ContactRepository)
 
         val recyclerView = findViewById<RecyclerView>(R.id.contact_recyclerview)
-        val adapter = ContactListAdapter()
+        val adapter = ContactListAdapter(viewModel)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
