@@ -9,7 +9,8 @@ import kotlinx.coroutines.flow.Flow
 interface ContactDao {
 
     @Query("SELECT * FROM contact_table WHERE contactId = :contactId")
-    fun getContactById(contactId: Long): Flow<Contact>
+    suspend fun getContactById(contactId: Long): Contact
+
 
     @Query("SELECT * FROM contact_table")
     fun getAll(): Flow<List<Contact>>

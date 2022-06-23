@@ -2,6 +2,7 @@ package com.beanstage.clientinfo.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.asLiveData
@@ -72,14 +73,16 @@ class ContactFormActivity : AppCompatActivity() {
                 currentContact = contactViewModel.getContactById(incomingContact).value
                 fillForm()
             }
+        } else {
+            actionBar?.title ?: "Nuevo Contacto"
         }
     }
 
     private fun fillForm() {
-        currentContact?.run {
-            contactName.setText(name)
-            contactLastName.setText(lastName)
-            contactReference.setText(reference)
+        currentContact.let {
+            contactName.setText(it?.name)
+            contactLastName.setText(it?.lastName)
+            contactReference.setText(it?.reference)
         }
     }
 
@@ -157,11 +160,11 @@ class ContactFormActivity : AppCompatActivity() {
 //        }
 //    }
 
-    fun setupAddresses() {
-        addressViewModel.getAllByClientName(clientId!!).observe(this) { addresses ->
-            addresses.let {  adapter.submitList(addresses) }
-        }
-    }
+//    fun setupAddresses() {
+//        addressViewModel.getAllByClientName(clientId!!).observe(this) { addresses ->
+//            addresses.let {  adapter.submitList(addresses) }
+//        }
+//    }
 
 //    fun getEditingClient() : Client {
 //        val buisnessName = clientName.text.toString()
@@ -187,33 +190,33 @@ class ContactFormActivity : AppCompatActivity() {
         return Contact(null, nameValue, lastNameValue, referenceValue)
     }
 
-    fun getEditingAddress() : Address {
-        val section = findViewById<EditText>(R.id.name_editText)
-        val street = findViewById<EditText>(R.id.last_name_editText)
-        val number = findViewById<EditText>(R.id.reference_editText)
-        val reference = findViewById<EditText>(R.id.address_reference_editText)
+//    fun getEditingAddress() : Address {
+//        val section = findViewById<EditText>(R.id.name_editText)
+//        val street = findViewById<EditText>(R.id.last_name_editText)
+//        val number = findViewById<EditText>(R.id.reference_editText)
+//        val reference = findViewById<EditText>(R.id.address_reference_editText)
+//
+//        val sectionValue = section.text.toString()
+//        val streetValue = street.text.toString()
+//        val numberValue = number.text.toString()
+//        val referenceValue = reference.text.toString()
+//
+//        section.text.clear()
+//        street.text.clear()
+//        number.text.clear()
+//        reference.text.clear()
+//
+//        return Address(null, clientId = clientId!!, sectorName = sectionValue, streetName = streetValue,
+//            number = numberValue, reference = referenceValue)
+//    }
 
-        val sectionValue = section.text.toString()
-        val streetValue = street.text.toString()
-        val numberValue = number.text.toString()
-        val referenceValue = reference.text.toString()
-
-        section.text.clear()
-        street.text.clear()
-        number.text.clear()
-        reference.text.clear()
-
-        return Address(null, clientId = clientId!!, sectorName = sectionValue, streetName = streetValue,
-            number = numberValue, reference = referenceValue)
-    }
-
-    fun enabledAddressSaveButton(currentClientId: Long) {
-        if (currentClientId > 0) {
-            addEditAddressButton.isEnabled = true
-            clientId = currentClientId
-            setupAddresses()
-        }
-    }
+//    fun enabledAddressSaveButton(currentClientId: Long) {
+//        if (currentClientId > 0) {
+//            addEditAddressButton.isEnabled = true
+//            clientId = currentClientId
+//            setupAddresses()
+//        }
+//    }
 
     // contacts code
 
