@@ -20,14 +20,16 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel() 
         val insertedId = MutableLiveData<Long?>()
 
         viewModelScope.launch {
-            val value =  repository.insert(contact)
+            val value = repository.insert(contact)
             insertedId.postValue(value)
         }
         return insertedId
     }
 
-    fun edit(contact: Contact) = viewModelScope.launch {
-        repository.edit(contact)
+    fun edit(contact: Contact) {
+        viewModelScope.launch {
+            repository.edit(contact)
+        }
     }
 
      fun delete(contact: Contact) {

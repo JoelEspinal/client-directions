@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
@@ -39,12 +40,13 @@ class ContactFormActivity : AppCompatActivity() {
 
     var clientId : Long? = 0
 
+    var  currentContact: Contact? = null
+
     private lateinit var contactName: EditText
     private lateinit var contactLastName: EditText
     private lateinit var contactReference: EditText
 
-    var  currentContact: Contact? = null
-
+    private lateinit var saveButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,16 +69,27 @@ class ContactFormActivity : AppCompatActivity() {
         contactLastName = findViewById(R.id.last_name_editText)
         contactReference = findViewById(R.id.reference_editText)
 
+        saveButton = findViewById(R.id.edit_button)
+
         val incomingContact =  intent.getLongExtra(CONTACT_ID, 0)
-        if (incomingContact > 0) {
+        fillWithContact(incomingContact)
+
+        saveButton.setOnClickListener {
+            saveContact()
+        }
+    }
+
+    fun fillWithContact(contactId: Long) {
+        if (contactId > 0) {
             lifecycleScope.launch {
-                currentContact = contactViewModel.getContactById(incomingContact).value
+                currentContact = contactViewModel.getContactById(contactId).value
                 fillForm()
             }
         } else {
             actionBar?.title ?: "Nuevo Contacto"
         }
     }
+
 
     private fun fillForm() {
         currentContact.let {
@@ -85,6 +98,32 @@ class ContactFormActivity : AppCompatActivity() {
             contactReference.setText(it?.reference)
         }
     }
+
+    private fun saveContact() {
+        val name = findViewById<EditText>(R.id.name_editText)
+        val lastName = findViewById<EditText>(R.id.last_name_editText)
+        val reference = findViewById<EditText>(R.id.reference_editText)
+
+        val nameValue = name.text.toString()
+        val lastNameValue = lastName.text.toString()
+        val referenceValue = reference.text.toString()
+
+        val newContact = Contact(null, nameValue, lastNameValue, referenceValue)
+
+        if (currentContact != null) {
+            currentContact.let {
+                newContact.contactId = currentContact?.contactId
+                contactViewModel.edit(newContact)
+            }
+
+            Toast.makeText(baseContext, "Guardado exitoso !!", Toast.LENGTH_LONG).show()
+        } else {
+            contactViewModel.insert(newContact).value
+            Toast.makeText(baseContext, "Guardado exitoso !!", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
 
 //    override
 //    fun onCreate2(savedInstanceState: Bundle?) {
@@ -174,21 +213,7 @@ class ContactFormActivity : AppCompatActivity() {
 //        return Client(null, buisnessName, socialReason, contactAgent)
 //    }
 
-    fun getEditingContact() : Contact{
-        val name = findViewById<EditText>(R.id.name_editText)
-        val lastName = findViewById<EditText>(R.id.last_name_editText)
-        val reference = findViewById<EditText>(R.id.reference_editText)
 
-        val nameValue = name.text.toString()
-        val lastNameValue = lastName.text.toString()
-        val referenceValue = reference.text.toString()
-
-        name.text.clear()
-        lastName.text.clear()
-        reference.text.clear()
-
-        return Contact(null, nameValue, lastNameValue, referenceValue)
-    }
 
 //    fun getEditingAddress() : Address {
 //        val section = findViewById<EditText>(R.id.name_editText)
