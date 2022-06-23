@@ -1,11 +1,14 @@
 package com.beanstage.clientinfo.activities
 
+import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +50,7 @@ class ContactFormActivity : AppCompatActivity() {
     private lateinit var contactReference: EditText
 
     private lateinit var saveButton: Button
+    private lateinit var cancelButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,12 +74,17 @@ class ContactFormActivity : AppCompatActivity() {
         contactReference = findViewById(R.id.reference_editText)
 
         saveButton = findViewById(R.id.edit_button)
+        cancelButton = findViewById(R.id.cancel_button)
 
         val incomingContact =  intent.getLongExtra(CONTACT_ID, 0)
         fillWithContact(incomingContact)
 
         saveButton.setOnClickListener {
             saveContact()
+        }
+
+        cancelButton.setOnClickListener{
+            setupDeleteDialog()
         }
     }
 
@@ -124,6 +133,22 @@ class ContactFormActivity : AppCompatActivity() {
     }
 
 
+    fun setupDeleteDialog() {
+        val builder = AlertDialog.Builder(ContactFormActivity@this)
+        builder.setMessage("Cancelar y salir?")
+            .setPositiveButton("Si, salir",
+                DialogInterface.OnClickListener { dialog, id ->
+                   finish()
+                })
+            .setNegativeButton(R.string.cancel_deleting_message,
+                DialogInterface.OnClickListener { dialog, id ->
+                    // User cancelled the dialog
+                })
+        // Create the AlertDialog object and return it
+        builder.create()
+
+        builder.show()
+    }
 
 //    override
 //    fun onCreate2(savedInstanceState: Bundle?) {
