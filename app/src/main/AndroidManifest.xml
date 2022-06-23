@@ -35,7 +35,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.ContactFormActivity"
-            android:label="@string/contacts"/>
+            android:label="@string/contacts"
+            android:parentActivityName=".activities.ContactActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activities.ContactActivity" />
+
+        </activity>
     </application>
 
 </manifest>

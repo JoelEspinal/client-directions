@@ -67,6 +67,8 @@ class ContactFormActivity : AppCompatActivity() {
 
 
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+
         contactViewModel = ContactViewModel((application as ContactApplication).ContactRepository)
 
         contactName = findViewById(R.id.name_editText)
