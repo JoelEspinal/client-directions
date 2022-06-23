@@ -58,11 +58,11 @@ abstract class ContactRoomDatabase : RoomDatabase() {
                 super.onCreate(db)
                 // If you want to keep the data through app restarts,
                 // comment out the following line.
-                INSTANCE?.let { database ->
-                    scope.launch(Dispatchers.IO) {
-                        populateContactsDatabase(database.contactDao())
-                    }
-                }
+//                INSTANCE?.let { database ->
+//                    scope.launch(Dispatchers.IO) {
+//                        populateContactsDatabase(database.contactDao())
+//                    }
+//                }
             }
         }
 
@@ -70,13 +70,9 @@ abstract class ContactRoomDatabase : RoomDatabase() {
          * Populate the database in a new coroutine.
          * If you want to start with more words, just add them.
          */
-        suspend fun populateContactsDatabase(contactDao: ContactDao) {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate on creation.
-            contactDao.deleteAll()
-
-
-            contactDao.insert(Contact(null, name = "Joel", lastName = "Espinal", reference = "dev"))
-            }
+//        suspend fun populateContactsDatabase(contactDao: ContactDao) {
+//            // Start the app with a clean database every time.
+//            // Not needed if you only populate on creation.
+//        }
     }
 }
