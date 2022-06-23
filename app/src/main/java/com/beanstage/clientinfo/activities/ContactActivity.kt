@@ -1,8 +1,12 @@
 package com.beanstage.clientinfo.activities
 
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beanstage.clientinfo.R
@@ -28,7 +32,15 @@ class ContactActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         viewModel.allContacts.observe(this) { contacts ->
-            contacts.let {  adapter.submitList(contacts) }
+            contacts.let {
+                adapter.submitList(contacts)
+                val emptyView = findViewById<TextView>(R.id.empty_view)
+                if (contacts.isEmpty()) {
+                    emptyView.visibility = View.VISIBLE
+                } else {
+                    emptyView.visibility = View.GONE
+                }
+            }
         }
 
         val fab = findViewById<FloatingActionButton>(R.id.new_client_fab)
