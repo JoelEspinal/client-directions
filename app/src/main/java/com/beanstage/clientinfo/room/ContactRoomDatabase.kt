@@ -5,15 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.beanstage.clientinfo.room.daos.AddressDao
-import com.beanstage.clientinfo.room.daos.ClientDao
 import com.beanstage.clientinfo.room.daos.ContactDao
-import com.beanstage.clientinfo.room.entities.Address
-import com.beanstage.clientinfo.room.entities.Client
 import com.beanstage.clientinfo.room.entities.Contact
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 @Database(entities = [Contact::class], version = 1, exportSchema = false)
@@ -51,28 +45,9 @@ abstract class ContactRoomDatabase : RoomDatabase() {
         private class WordDatabaseCallback(
             private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {
-            /**
-             * Override the onCreate method to populate the database.
-             */
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-                // If you want to keep the data through app restarts,
-                // comment out the following line.
-//                INSTANCE?.let { database ->
-//                    scope.launch(Dispatchers.IO) {
-//                        populateContactsDatabase(database.contactDao())
-//                    }
-//                }
             }
         }
-
-        /**
-         * Populate the database in a new coroutine.
-         * If you want to start with more words, just add them.
-         */
-//        suspend fun populateContactsDatabase(contactDao: ContactDao) {
-//            // Start the app with a clean database every time.
-//            // Not needed if you only populate on creation.
-//        }
     }
 }

@@ -3,7 +3,6 @@ package com.beanstage.clientinfo.viewmodels
 import androidx.lifecycle.*
 import com.beanstage.clientinfo.repositories.ContactRepository
 import com.beanstage.clientinfo.room.entities.Contact
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class ContactViewModel(private val repository: ContactRepository) : ViewModel() {

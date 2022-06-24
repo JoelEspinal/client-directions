@@ -96,6 +96,4 @@ class ContactListAdapter(val contactViewModel: ContactViewModel): ListAdapter<Co
             }
         }
     }
-
-
 }
